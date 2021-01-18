@@ -181,22 +181,24 @@ class AbbreviationAutocomplete extends React.Component {
   }
 
   render () {
+    const state = this.state
+
     return <div className='abbreviation-autocomplete'>
       <input
         type='text'
         placeholder={this.props.placeholder}
-        value={this.state.searchText}
+        value={state.searchText}
         onBlur={() => {this.setState({ showSearchItems: false })}}
         onChange={this.onSearchTextChange}
         onFocus={this.onInputFocus}
         onKeyDown={this.onInputKeyPress} />
-      <ul style={{ display: this.state.showSearchItems ? null : "none" }}>
-        {this.state.searchList.map((searchItem, index) => (
-          <li key={index} className={this.state.selected === index ? 'selected' : null} onMouseDown={this.select} onMouseEnter={() => { this.setState({ selected: index }) }}>
+      <ul style={{ display: state.showSearchItems ? null : "none" }}>
+        {state.searchList.map((searchItem, index) => (
+          <li key={index} className={state.selected === index ? 'selected' : null} onMouseDown={this.select} onMouseEnter={() => { this.setState({ selected: index }) }}>
             <span>{searchItem.a}</span>
             <span> ({searchItem.d.substr(0, searchItem.substrIndex)}</span>
-            <span className='highlight'>{searchItem.d.substr(searchItem.substrIndex, this.state.searchText.length)}</span>
-            <span>{searchItem.d.substr(searchItem.substrIndex + this.state.searchText.length)})</span>
+            <span className='highlight'>{searchItem.d.substr(searchItem.substrIndex, state.searchText.length)}</span>
+            <span>{searchItem.d.substr(searchItem.substrIndex + state.searchText.length)})</span>
           </li>
         ))}
       </ul>
