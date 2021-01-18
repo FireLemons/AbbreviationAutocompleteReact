@@ -81,18 +81,36 @@ class AbbreviationAutocomplete extends React.Component {
       throw new TypeError(`Prop searchText must be a string. Instead received ${typeof props.searchText}`);
     }
 
+    if (props.onSelect) {
+      if (!(props.onSelect instanceof Function)) {
+        throw new TypeError(`Prop onSelect must be a function. Instead received ${typeof props.onSelect}`);
+      }
+    }
+
     this.state = {
       data: props.data,
       recentlySelected: false,
       showSearchItems: false,
       searchList: [],
-      searchText: this.props.searchText === undefined ? '' : this.props.searchText,
+      searchText: props.searchText === undefined ? '' : props.searchText,
       selected: -1
     };
     this.onSearchTextChange = this.onSearchTextChange.bind(this);
     this.onInputFocus = this.onInputFocus.bind(this);
     this.onInputKeyPress = this.onInputKeyPress.bind(this);
     this.select = this.select.bind(this);
+  }
+
+  componentDidMount() {
+    const props = this.props; // Modify some methods to call prop functions if prop functions are passed
+
+    if (props.onSelect) {
+      let select = this.select;
+
+      this.select = () => {
+        props.onSelect(select());
+      };
+    }
   }
 
   onInputFocus() {
@@ -168,10 +186,12 @@ class AbbreviationAutocomplete extends React.Component {
 
   select() {
     const state = this.state;
-    let selectedData;
 
     if (state.selected !== -1) {
-      selectedData = JSON.parse(JSON.stringify(state.searchList[state.selected]));
+      let selectedSearchItem = state.searchList[state.selected];
+      delete selectedSearchItem['substrIndex'];
+      let selectedData = JSON.parse(JSON.stringify(selectedSearchItem)); // Copy object
+
       this.setState({
         recentlySelected: true,
         searchText: state.searchList[state.selected].a,
