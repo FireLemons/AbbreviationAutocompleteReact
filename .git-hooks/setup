@@ -1,0 +1,9 @@
+#!/bin/bash
+
+repo_root=$(git rev-parse --show-toplevel)
+
+# create sym links to hooks in .git-hooks/
+ln -s $repo_root/.git-hooks/* $repo_root/.git/hooks/
+
+# remove link to this script
+rm $repo_root/.git/hooks/setup
