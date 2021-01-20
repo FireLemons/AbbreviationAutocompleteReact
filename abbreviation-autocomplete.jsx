@@ -80,10 +80,12 @@ class AbbreviationAutocomplete extends React.Component {
       throw new TypeError(`Prop searchText must be a string. Instead received ${typeof props.searchText}`)
     }
 
-    if (props.onSelect) {
-      if (!(props.onSelect instanceof Function)) {
-        throw new TypeError(`Prop onSelect must be a function. Instead received ${typeof props.onSelect}`)
-      }
+    if (props.onSelect && !(props.onSelect instanceof Function)) {
+      throw new TypeError(`Prop onSelect must be a function. Instead received ${typeof props.onSelect}`)
+    }
+
+    if (props.onSearchTextChange && !(props.onSearchTextChange instanceof Function)) {
+      throw new TypeError(`Prop onSearchTextChange must be a function. Instead received ${typeof props.onSearchTextChange}`)
     }
 
     this.state = {
@@ -110,6 +112,15 @@ class AbbreviationAutocomplete extends React.Component {
 
       this.select = () => {
         props.onSelect(select())
+      }
+    }
+
+    if (props.onSearchTextChange) {
+      let onSearchTextChange = this.onSearchTextChange
+
+      this.onSearchTextChange = (e) => {
+        onSearchTextChange(e)
+        props.onSearchTextChange(e.target.value)
       }
     }
   }
