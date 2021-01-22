@@ -1,4 +1,5 @@
 'use strict'
+import React, { Component } from 'react';
 
 // Inserts an element into a sorted array containing a limited range of integers
 //  @param {array} arr The sorted array
@@ -52,7 +53,7 @@ function countingSortInsert (arr, arrReduced, elem, elemGroup) {
   arr.splice(arrReduced[elemGroup][1], 0, elem)
 }
 
-class AbbreviationAutocomplete extends React.Component {
+class AbbreviationAutocomplete extends Component {
   constructor (props) {
     super(props)
 
@@ -243,3 +244,5 @@ AbbreviationAutocomplete.defaultProps = {
   minSearchTextLength: 1,
   searchText: ''
 }
+
+export default AbbreviationAutocomplete;
