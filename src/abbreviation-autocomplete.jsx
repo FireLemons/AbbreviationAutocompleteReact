@@ -1,5 +1,6 @@
 'use strict'
 import React, { Component } from 'react';
+import './abbreviation-autocomplete.css';
 
 // Inserts an element into a sorted array containing a limited range of integers
 //  @param {array} arr The sorted array
