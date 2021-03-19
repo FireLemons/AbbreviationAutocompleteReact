@@ -4,6 +4,9 @@ An autocomplete for abbreviations/acronyms searching by description rather than 
 ![autocomplete_screenshot](https://raw.githubusercontent.com/FireLemons/DocumentationMaterials/main/img/abbreviation-autocomplete-react.png)
 ### [Live Example](https://firelemons.github.io/AutocompleteExample/react/)
 
+## Install
+    npm i abbreviation-autocomplete-react
+
 ## Props
 ##### data
 The autocomplete search data
