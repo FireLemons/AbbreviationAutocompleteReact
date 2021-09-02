@@ -42,7 +42,7 @@ Placeholder text for the search text input
 
 #### Functions  
 ##### onSearchTextChange
-Triggered whenever the search text changes
+Triggered whenever the search text changes  
 Emits the text of the autocomplete search
 
 ##### onSelect
